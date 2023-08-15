@@ -11,31 +11,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Interface Adapters", "3.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Frameworks And Drivers", "4. Frameworks And Drivers", "{0A96C06B-77EC-4239-AEE3-8211E8F16C5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Entities", "NorthWind.Entities\NorthWind.Entities.csproj", "{5FF64F98-F9C9-4B03-A143-DCA1686C9B40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Entities", "NorthWind.Entities\NorthWind.Entities.csproj", "{5FF64F98-F9C9-4B03-A143-DCA1686C9B40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Sales.BusinessObjects", "NorthWind.Sales.BusinessObjects\NorthWind.Sales.BusinessObjects.csproj", "{CAA9CDD0-7D99-49B2-9D2E-F0B960034A77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Sales.BusinessObjects", "NorthWind.Sales.BusinessObjects\NorthWind.Sales.BusinessObjects.csproj", "{CAA9CDD0-7D99-49B2-9D2E-F0B960034A77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Sales.UseCases", "NorthWind.Sales.UseCases\NorthWind.Sales.UseCases.csproj", "{7CA14F8C-8754-4634-A33C-9637B71EF96D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Sales.UseCases", "NorthWind.Sales.UseCases\NorthWind.Sales.UseCases.csproj", "{7CA14F8C-8754-4634-A33C-9637B71EF96D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{FA0E859E-759C-4DCE-828E-B9EFBA35FA1D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositories", "Repositories", "{078F4C4F-6FDA-469F-A701-7CD9B50F278C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.EFCore.Repositories", "NorthWind.EFCore.Repositories\NorthWind.EFCore.Repositories.csproj", "{1D0C4CAC-F543-4E5C-A8D8-D30EB9454567}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.EFCore.Repositories", "NorthWind.EFCore.Repositories\NorthWind.EFCore.Repositories.csproj", "{1D0C4CAC-F543-4E5C-A8D8-D30EB9454567}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presenters", "Presenters", "{021A3002-515D-41CD-AEB3-483CDF601518}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Sales.Presenters", "NorthWind.Sales.Presenters\NorthWind.Sales.Presenters.csproj", "{69418F95-2F1D-4D01-90AB-4291C0DF2FA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Sales.Presenters", "NorthWind.Sales.Presenters\NorthWind.Sales.Presenters.csproj", "{69418F95-2F1D-4D01-90AB-4291C0DF2FA8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{36DFE900-BB76-4B97-8F4D-618189756B18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Sales.Controllers", "NorthWind.Sales.Controllers\NorthWind.Sales.Controllers.csproj", "{D9EF940F-2247-49BE-8033-0BCEFD78F0E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Sales.Controllers", "NorthWind.Sales.Controllers\NorthWind.Sales.Controllers.csproj", "{D9EF940F-2247-49BE-8033-0BCEFD78F0E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Sales.IoC", "NorthWind.Sales.IoC\NorthWind.Sales.IoC.csproj", "{11CAEA03-1037-4133-8FC2-780153B09FD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Sales.IoC", "NorthWind.Sales.IoC\NorthWind.Sales.IoC.csproj", "{11CAEA03-1037-4133-8FC2-780153B09FD0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UIs", "UIs", "{46F1AC94-67CB-4B52-9878-3EC78EF4A47C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Sales.WebApi", "NorthWind.Sales.WebApi\NorthWind.Sales.WebApi.csproj", "{C06A9D80-A080-4890-ABA1-E6FA448C124D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Sales.WebApi", "NorthWind.Sales.WebApi\NorthWind.Sales.WebApi.csproj", "{C06A9D80-A080-4890-ABA1-E6FA448C124D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Sales.API", "NorthWind.Sales.API\NorthWind.Sales.API.csproj", "{7AD15C3C-6264-4DF9-BACB-5BF5622789E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{C06A9D80-A080-4890-ABA1-E6FA448C124D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C06A9D80-A080-4890-ABA1-E6FA448C124D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C06A9D80-A080-4890-ABA1-E6FA448C124D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AD15C3C-6264-4DF9-BACB-5BF5622789E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AD15C3C-6264-4DF9-BACB-5BF5622789E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AD15C3C-6264-4DF9-BACB-5BF5622789E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AD15C3C-6264-4DF9-BACB-5BF5622789E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{11CAEA03-1037-4133-8FC2-780153B09FD0} = {D64536C9-EC45-4851-A39E-70BE5D28CBE3}
 		{46F1AC94-67CB-4B52-9878-3EC78EF4A47C} = {0A96C06B-77EC-4239-AEE3-8211E8F16C5D}
 		{C06A9D80-A080-4890-ABA1-E6FA448C124D} = {46F1AC94-67CB-4B52-9878-3EC78EF4A47C}
+		{7AD15C3C-6264-4DF9-BACB-5BF5622789E2} = {46F1AC94-67CB-4B52-9878-3EC78EF4A47C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90ACBE69-4268-4CFA-A92C-1299F44B1A8E}
