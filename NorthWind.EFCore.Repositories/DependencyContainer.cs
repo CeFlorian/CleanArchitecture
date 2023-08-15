@@ -13,6 +13,8 @@
 
             services.AddScoped<INorthWindSalesCommandsRepository,
                 NorthWindSalesCommandsRepository>();
+            services.AddScoped<INorthWindSalesQuerysRepository,
+                NorthWindSalesQuerysRepository>();
 
             return services;
         }

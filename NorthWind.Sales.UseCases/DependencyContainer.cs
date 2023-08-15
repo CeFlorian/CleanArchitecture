@@ -1,4 +1,6 @@
-﻿namespace NorthWind.Sales.UseCases
+﻿using NorthWind.Sales.UseCases.GetAllOrders;
+
+namespace NorthWind.Sales.UseCases
 {
     public static class DependencyContainer
     {
@@ -6,6 +8,7 @@
             this IServiceCollection services)
         {
             services.AddScoped<ICreateOrderInputPort, CreateOrderInteractor>();
+            services.AddScoped<IGetAllOrdersInputPort, GetAllOrdersInteractor>();
 
             return services;
         }

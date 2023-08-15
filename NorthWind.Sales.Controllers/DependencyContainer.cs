@@ -7,6 +7,9 @@
         {
             services.AddScoped<ICreateOrderController,
                 CreateOrderController>();
+            services.AddScoped<IGetAllOrdersController,
+                GetAllOrdersController>();
+
             return services;
         }
     }

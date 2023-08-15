@@ -2,6 +2,13 @@
 {
     public class OrderAggregate : Order
     {
+        /*
+         * Agregado como grupo de objetos de dominio que pueden ser tratados como una unidad.
+         * Por ejemplo puede ser una orden con su detalle
+         * Cualquier referencia desde fuera del Agregado solo debe ir a la raíz del Agregado.
+         * De este modo, la raíz puede garantizar la integridad del Agregado en su conjunto.
+         */
+
         readonly List<OrderDetail> OrderDetailsField = new List<OrderDetail>();
         public IReadOnlyCollection<OrderDetail> OrderDetails => OrderDetailsField;
 

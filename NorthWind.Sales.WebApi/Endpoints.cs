@@ -10,6 +10,10 @@
                 ICreateOrderController controller) =>
                 Results.Ok(await controller.CreateOrder(order)));
 
+            app.MapGet("/getAll",
+                async (IGetAllOrdersController controller) =>
+                Results.Ok(await controller.GetAllOrders()));
+
             return app;
         }
     }
