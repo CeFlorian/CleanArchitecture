@@ -1,32 +1,27 @@
 ﻿using NorthWind.Entities.Interfaces;
+using NorthWind.Entities.POCOs;
 
 namespace NorthWind.EFCore.Repositories.Repositories
 {
-    public class NorthWindSalesCommandsRepository : INorthWindSalesCommandsRepository
+    public class LogWritableRepository : ILogWritableRepository
     {
         readonly NorthWindSalesContext Context;
         readonly IApplicationStatusLogger Logger;
-
-        public NorthWindSalesCommandsRepository(NorthWindSalesContext context, IApplicationStatusLogger logger)
+        public LogWritableRepository(NorthWindSalesContext context, IApplicationStatusLogger logger)
         {
             Context = context;
             Logger = logger;
         }
 
-
-        public async ValueTask CreateOrder(OrderAggregate order)
+        public async Task Add(Log log)
         {
-            await Context.AddAsync(order);
-            foreach (var Item in order.OrderDetails)
-            {
-                await Context.AddAsync(new OrderDetail
-                {
-                    Order = order,
-                    ProductId = Item.ProductId,
-                    Quantity = Item.Quantity,
-                    UnitPrice = Item.UnitPrice
-                });
-            }
+            Context.Add(log);
+            await SaveChanges();
+        }
+
+        public async Task Add(string description)
+        {
+            await Add(new Log(description));
         }
 
         public async ValueTask SaveChanges()
@@ -45,5 +40,7 @@ namespace NorthWind.EFCore.Repositories.Repositories
             }
 
         }
+
     }
+
 }
