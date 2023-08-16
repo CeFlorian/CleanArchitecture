@@ -1,6 +1,4 @@
-﻿using NorthWind.Loggers;
-
-namespace NorthWind.Sales.IoC
+﻿namespace NorthWind.Sales.IoC
 {
     public static class DependencyContainer
     {
@@ -13,8 +11,7 @@ namespace NorthWind.Sales.IoC
                 .AddRepositories(configuration, connectionStringName)
                 .AddUseCasesServices()
                 .AddPresenters()
-                .AddNorthWindSalesControllers()
-                .AddLoggers();
+                .AddNorthWindSalesControllers();
 
             return services;
         }

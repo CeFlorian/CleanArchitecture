@@ -1,18 +1,11 @@
-﻿using NorthWind.Entities.Interfaces;
-
-namespace NorthWind.EFCore.Repositories.Repositories
+﻿namespace NorthWind.EFCore.Repositories.Repositories
 {
     public class NorthWindSalesCommandsRepository : INorthWindSalesCommandsRepository
     {
         readonly NorthWindSalesContext Context;
-        readonly IApplicationStatusLogger Logger;
-
-        public NorthWindSalesCommandsRepository(NorthWindSalesContext context, IApplicationStatusLogger logger)
-        {
+        public NorthWindSalesCommandsRepository(
+            NorthWindSalesContext context) =>
             Context = context;
-            Logger = logger;
-        }
-
 
         public async ValueTask CreateOrder(OrderAggregate order)
         {
@@ -31,19 +24,7 @@ namespace NorthWind.EFCore.Repositories.Repositories
 
         public async ValueTask SaveChanges()
         {
-            try
-            {
-                await Context.SaveChangesAsync();
-            }
-            catch (DbUpdateException ex)
-            {
-                Logger.Log(ex.InnerException?.Message ?? ex.Message);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(ex.Message);
-            }
-
+            await Context.SaveChangesAsync();
         }
     }
 }

@@ -1,14 +1,7 @@
-﻿using NorthWind.Entities.POCOs;
-
-namespace NorthWind.EFCore.Repositories.DataContexts
+﻿namespace NorthWind.EFCore.Repositories.DataContexts
 {
     internal class NorthWindContext : DbContext
     {
-        /*
-         * Add-Migration InitialCreate -p NorthWind.EFcore.Repositories -s NorthWind.EFcore.Repositories -c NorthWindContext
-         * Update-Database -p NorthWind.EFcore.Repositories -s NorthWind.EFcore.Repositories -context NorthWindContext
-         */
-
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
         {
@@ -18,7 +11,6 @@ namespace NorthWind.EFCore.Repositories.DataContexts
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Log> Logs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

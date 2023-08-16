@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NorthWind.EFCore.Repositories\NorthWind.EFCore.Repositories.csproj" />
-    <ProjectReference Include="..\NorthWind.Loggers\NorthWind.Loggers.csproj" />
     <ProjectReference Include="..\NorthWind.Sales.Controllers\NorthWind.Sales.Controllers.csproj" />
     <ProjectReference Include="..\NorthWind.Sales.Presenters\NorthWind.Sales.Presenters.csproj" />
     <ProjectReference Include="..\NorthWind.Sales.UseCases\NorthWind.Sales.UseCases.csproj" />
