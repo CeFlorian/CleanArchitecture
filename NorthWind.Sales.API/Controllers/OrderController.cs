@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NorthWind.Entities.Validators;
 using NorthWind.Sales.BusinessObjects.DTOs.CreateOrder;
 using NorthWind.Sales.BusinessObjects.Interfaces.Controllers;
 
@@ -21,14 +22,22 @@ namespace NorthWind.Sales.API.Controllers
 
         // GET: api/<OrderController>
         [HttpGet]
-        public async Task<IResult> Get() =>
-            Results.Ok(await GetAllOrdersController.GetAllOrders());
+        public async Task<IActionResult> Get()
+        {
+            //return Ok(await GetAllOrdersController.GetAllOrders());
+            return Ok(Results.Ok(await GetAllOrdersController.GetAllOrders()));
+        }
 
 
         // POST api/<OrderController>
         [HttpPost]
-        public async Task<IResult> Post([FromBody] CreateOrderDTO order) =>
-            Results.Ok(await CreateOrderController.CreateOrder(order));
+        public async Task<IActionResult> Post([FromBody] CreateOrderDTO order)
+        {
+            //return Ok(await CreateOrderController.CreateOrder(order));
+            try { return Ok(Results.Ok(await CreateOrderController.CreateOrder(order))); }
+            catch (ValidationException ex) { return BadRequest(Results.BadRequest(ex.Message)); }
+
+        }
 
 
         //// GET api/<OrderController>/5

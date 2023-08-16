@@ -1,19 +1,31 @@
-﻿namespace NorthWind.Sales.UseCases.CreateOrder
+﻿using NorthWind.Entities.Validators;
+
+namespace NorthWind.Sales.UseCases.CreateOrder
 {
     public class CreateOrderInteractor : ICreateOrderInputPort
     {
         readonly ICreateOrderOutputPort OutputPort;
         readonly INorthWindSalesCommandsRepository Repository;
+        readonly IValidatorService<CreateOrderDTO> ValidatorService;
+        readonly IEnumerable<IValidator<CreateOrderDTO>> Validators;
+
 
         public CreateOrderInteractor(ICreateOrderOutputPort outputPort,
-            INorthWindSalesCommandsRepository repository)
+            INorthWindSalesCommandsRepository repository,
+            IValidatorService<CreateOrderDTO> validatorService,
+            IEnumerable<IValidator<CreateOrderDTO>> validators)
         {
             OutputPort = outputPort;
             Repository = repository;
+            ValidatorService = validatorService;
+            Validators = validators;
         }
 
         public async ValueTask Handle(CreateOrderDTO orderDTO)
         {
+            //ValidatorService.Validate(orderDTO, Validators, Logger);
+            ValidatorService.Validate(orderDTO, Validators);
+
             OrderAggregate orderAggregate = new OrderAggregate
             {
                 CustomerId = orderDTO.CustomerId,

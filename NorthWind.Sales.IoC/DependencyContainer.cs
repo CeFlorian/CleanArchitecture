@@ -1,4 +1,7 @@
-﻿namespace NorthWind.Sales.IoC
+﻿using NorthWind.Entities;
+using NorthWind.Sales.BusinessObjects;
+
+namespace NorthWind.Sales.IoC
 {
     public static class DependencyContainer
     {
@@ -8,6 +11,8 @@
             string connectionStringName)
         {
             services
+                .AddEntityServices()
+                .AddDTOValidators()
                 .AddRepositories(configuration, connectionStringName)
                 .AddUseCasesServices()
                 .AddPresenters()
