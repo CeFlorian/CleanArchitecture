@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Sales.IoC", "Nort
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UIs", "UIs", "{46F1AC94-67CB-4B52-9878-3EC78EF4A47C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Sales.API", "NorthWind.Sales.API\NorthWind.Sales.API.csproj", "{7AD15C3C-6264-4DF9-BACB-5BF5622789E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Sales.API", "NorthWind.Sales.API\NorthWind.Sales.API.csproj", "{7AD15C3C-6264-4DF9-BACB-5BF5622789E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
