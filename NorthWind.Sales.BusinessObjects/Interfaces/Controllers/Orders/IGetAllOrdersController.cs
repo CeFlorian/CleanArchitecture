@@ -1,4 +1,4 @@
-﻿namespace NorthWind.Sales.BusinessObjects.Interfaces.Controllers
+﻿namespace NorthWind.Sales.BusinessObjects.Interfaces.Controllers.Orders
 {
     public interface IGetAllOrdersController
     {

@@ -1,4 +1,6 @@
-﻿namespace NorthWind.Sales.Controllers
+﻿using NorthWind.Sales.BusinessObjects.Interfaces.Controllers.Orders;
+
+namespace NorthWind.Sales.Controllers
 {
     public class CreateOrderController : ICreateOrderController
     {

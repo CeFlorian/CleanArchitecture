@@ -1,17 +1,20 @@
-﻿namespace NorthWind.Sales.IoC
+﻿using NorthWind.Token.Services;
+
+namespace NorthWind.Sales.IoC
 {
     public static class DependencyContainer
     {
         public static IServiceCollection AddNorthWindSalesServices(
             this IServiceCollection services,
-            IConfiguration configuration,
+            IConfiguration configuration, string jwtSettingsName,
             string connectionStringName)
         {
             services
                 .AddRepositories(configuration, connectionStringName)
                 .AddUseCasesServices()
                 .AddPresenters()
-                .AddNorthWindSalesControllers();
+                .AddNorthWindSalesControllers()
+                .AddTokenServices(configuration, jwtSettingsName);
 
             return services;
         }

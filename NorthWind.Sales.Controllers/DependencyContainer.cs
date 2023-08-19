@@ -1,4 +1,7 @@
-﻿namespace NorthWind.Sales.Controllers
+﻿using NorthWind.Sales.BusinessObjects.Interfaces.Controllers.Login;
+using NorthWind.Sales.BusinessObjects.Interfaces.Controllers.Orders;
+
+namespace NorthWind.Sales.Controllers
 {
     public static class DependencyContainer
     {
@@ -16,6 +19,8 @@
                 CreateOrderController>();
             services.AddScoped<IGetAllOrdersController,
                 GetAllOrdersController>();
+            services.AddScoped<ILoginController,
+                LoginController>();
 
             return services;
         }
