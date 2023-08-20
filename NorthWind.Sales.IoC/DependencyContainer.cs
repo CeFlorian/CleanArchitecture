@@ -1,14 +1,17 @@
-﻿namespace NorthWind.Sales.IoC
+﻿using NorthWind.SqlClient.Repositories;
+
+namespace NorthWind.Sales.IoC
 {
     public static class DependencyContainer
     {
         public static IServiceCollection AddNorthWindSalesServices(
             this IServiceCollection services,
             IConfiguration configuration,
-            string connectionStringName)
+            string connectionStringNameEF, string connectionStringNameSqlClient)
         {
             services
-                .AddRepositories(configuration, connectionStringName)
+                .AddEFRepositories(configuration, connectionStringNameEF)
+                .AddSqlClientRepositories(configuration, connectionStringNameSqlClient)
                 .AddUseCasesServices()
                 .AddPresenters()
                 .AddNorthWindSalesControllers();

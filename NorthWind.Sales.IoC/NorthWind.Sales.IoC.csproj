@@ -16,6 +16,7 @@
     <ProjectReference Include="..\NorthWind.Sales.Controllers\NorthWind.Sales.Controllers.csproj" />
     <ProjectReference Include="..\NorthWind.Sales.Presenters\NorthWind.Sales.Presenters.csproj" />
     <ProjectReference Include="..\NorthWind.Sales.UseCases\NorthWind.Sales.UseCases.csproj" />
+    <ProjectReference Include="..\NorthWind.SqlClient.Repositories\NorthWind.SqlClient.Repositories.csproj" />
   </ItemGroup>
 
 </Project>
