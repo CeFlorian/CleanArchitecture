@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Registrar los servicios de la aplicación
 builder.Services.AddNorthWindSalesServices(
-    builder.Configuration, "JwtSettings", "NorthWindDB");
+    builder.Configuration, "JwtSettings", "NorthWindDB", "APISettings");
 
 builder.Services.AddControllers();
 

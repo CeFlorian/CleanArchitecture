@@ -13,15 +13,20 @@ namespace NorthWind.Sales.UseCases.Login
         readonly IRefreshTokenCommandsRepository RefreshTokenCommandsRepository;
         readonly ICryptographyService CryptographyService;
 
+        readonly IWeatherAPIService WeatherAPIService;
+
         public LoginInteractor(ILoginOutputPort outputPort, IAuthTokenService authTokenService,
             IUserQuerysRepository serQuerysRepository, ICryptographyService cryptographyService,
-            IRefreshTokenCommandsRepository refreshTokenCommandsRepository)
+            IRefreshTokenCommandsRepository refreshTokenCommandsRepository,
+            IWeatherAPIService weatherAPIService)
         {
             OutputPort = outputPort;
             AuthTokenService = authTokenService;
             UserQuerysRepository = serQuerysRepository;
             RefreshTokenCommandsRepository = refreshTokenCommandsRepository;
             CryptographyService = cryptographyService;
+
+            WeatherAPIService = weatherAPIService;
         }
 
         public async Task Handle(LoginRequestDTO request)
@@ -64,6 +69,9 @@ namespace NorthWind.Sales.UseCases.Login
                     await RefreshTokenCommandsRepository.CreateRefreshToken(refreshToken);
                     await RefreshTokenCommandsRepository.SaveChanges();
                     await OutputPort.Handle(response);
+
+                    var result = await WeatherAPIService.GetWeatherForecasts(accessToken);
+
                     return;
                 }
                 else

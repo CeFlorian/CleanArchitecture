@@ -1,4 +1,5 @@
-﻿using NorthWind.Token.Services;
+﻿using NorthWind.API.Services;
+using NorthWind.Token.Services;
 
 namespace NorthWind.Sales.IoC
 {
@@ -7,14 +8,15 @@ namespace NorthWind.Sales.IoC
         public static IServiceCollection AddNorthWindSalesServices(
             this IServiceCollection services,
             IConfiguration configuration, string jwtSettingsName,
-            string connectionStringName)
+            string connectionStringName, string apiSettingsName)
         {
             services
                 .AddRepositories(configuration, connectionStringName)
                 .AddUseCasesServices()
                 .AddPresenters()
                 .AddNorthWindSalesControllers()
-                .AddTokenServices(configuration, jwtSettingsName);
+                .AddTokenServices(configuration, jwtSettingsName)
+                .AddAPIServices(configuration, apiSettingsName);
 
             return services;
         }

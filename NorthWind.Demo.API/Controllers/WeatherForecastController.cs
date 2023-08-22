@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NorthWind.Demo.API.POCOs;
+using NorthWind.Entities.POCOEntities;
 
 namespace NorthWind.Demo.API.Controllers
 {

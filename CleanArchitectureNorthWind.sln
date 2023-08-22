@@ -39,9 +39,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Sales.API", "Nort
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B48F0973-147A-492C-90E3-E717A392F4C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Token.Services", "NorthWind.Token.Services\NorthWind.Token.Services.csproj", "{30A35744-2495-4845-A4E3-22E07BA49B7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Token.Services", "NorthWind.Token.Services\NorthWind.Token.Services.csproj", "{30A35744-2495-4845-A4E3-22E07BA49B7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Demo.API", "NorthWind.Demo.API\NorthWind.Demo.API.csproj", "{DDAEC588-A99A-4831-B6CA-AFDC571BCEB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Demo.API", "NorthWind.Demo.API\NorthWind.Demo.API.csproj", "{DDAEC588-A99A-4831-B6CA-AFDC571BCEB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.API.Services", "NorthWind.Wheater.Services\NorthWind.API.Services.csproj", "{3A97B602-88EB-437D-9E1F-B11748C163CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{DDAEC588-A99A-4831-B6CA-AFDC571BCEB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDAEC588-A99A-4831-B6CA-AFDC571BCEB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDAEC588-A99A-4831-B6CA-AFDC571BCEB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A97B602-88EB-437D-9E1F-B11748C163CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A97B602-88EB-437D-9E1F-B11748C163CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A97B602-88EB-437D-9E1F-B11748C163CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A97B602-88EB-437D-9E1F-B11748C163CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +116,7 @@ Global
 		{B48F0973-147A-492C-90E3-E717A392F4C3} = {FA0E859E-759C-4DCE-828E-B9EFBA35FA1D}
 		{30A35744-2495-4845-A4E3-22E07BA49B7F} = {B48F0973-147A-492C-90E3-E717A392F4C3}
 		{DDAEC588-A99A-4831-B6CA-AFDC571BCEB8} = {46F1AC94-67CB-4B52-9878-3EC78EF4A47C}
+		{3A97B602-88EB-437D-9E1F-B11748C163CB} = {B48F0973-147A-492C-90E3-E717A392F4C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90ACBE69-4268-4CFA-A92C-1299F44B1A8E}

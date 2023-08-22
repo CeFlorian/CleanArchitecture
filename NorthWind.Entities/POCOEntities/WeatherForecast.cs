@@ -1,4 +1,4 @@
-namespace NorthWind.Demo.API.POCOs
+namespace NorthWind.Entities.POCOEntities
 {
     public class WeatherForecast
     {
