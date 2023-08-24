@@ -1,4 +1,6 @@
-﻿namespace NorthWind.Sales.IoC
+﻿using NorthWind.RabbitMQ.Service;
+
+namespace NorthWind.Sales.IoC
 {
     public static class DependencyContainer
     {
@@ -15,5 +17,16 @@
 
             return services;
         }
+
+        public static IServiceCollection AddNorthWindConsumerServices(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services
+                .AddBusServices(configuration);
+
+            return services;
+        }
+
     }
 }

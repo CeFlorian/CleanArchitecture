@@ -1,0 +1,40 @@
+﻿using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
+using NorthWind.Sales.BusinessObjects.POCOEntities;
+
+namespace MicroRabbit.Transfer.Application.EventHandler
+{
+    public class OrderCreatedEventHandler : IEventHandler<OrderCreatedEvent>
+    {
+
+        readonly INorthWindSalesCommandsRepository Repository;
+
+        public OrderCreatedEventHandler(INorthWindSalesCommandsRepository repository)
+        {
+            Repository = repository;
+        }
+        public async Task<bool> Handle(OrderCreatedEvent @event)
+        {
+            OrderAggregate orderAggregate = new OrderAggregate
+            {
+                CustomerId = @event.CustomerId,
+                ShipAddress = @event.ShipAddress,
+                ShipCity = @event.ShipCity,
+                ShipCountry = @event.ShipCountry,
+                ShipPostalCode = @event.ShipPostalCode
+            };
+
+            foreach (var item in @event.OrderDetails)
+            {
+                orderAggregate.AddDetail(item.ProductId, item.UnitPrice, item.Quantity);
+            }
+
+            await Repository.CreateOrder(orderAggregate);
+            await Repository.SaveChanges();
+
+            return true;
+
+        }
+
+
+    }
+}
