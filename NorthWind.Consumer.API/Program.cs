@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Registrar los servicios de la aplicación
 builder.Services.AddNorthWindConsumerServices(
-    builder.Configuration, "MongoDB");
+    builder.Configuration, "MongoDB", "MongoDBSettings", "MessageBroker:Host");
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

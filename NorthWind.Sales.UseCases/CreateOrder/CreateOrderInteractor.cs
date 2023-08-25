@@ -40,11 +40,12 @@ namespace NorthWind.Sales.UseCases.CreateOrder
 
             EventBus.Publish(new OrderCreatedEvent()
             {
-                CustomerId = orderDTO.CustomerId,
-                ShipAddress = orderDTO.ShipAddress,
-                ShipCity = orderDTO.ShipCity,
-                ShipCountry = orderDTO.ShipCountry,
-                ShipPostalCode = orderDTO.ShipPostalCode,
+                Id = orderAggregate.Id,
+                CustomerId = orderAggregate.CustomerId,
+                ShipAddress = orderAggregate.ShipAddress,
+                ShipCity = orderAggregate.ShipCity,
+                ShipCountry = orderAggregate.ShipCountry,
+                ShipPostalCode = orderAggregate.ShipPostalCode,
                 OrderDetails = orderDTO.OrderDetails
             });
 

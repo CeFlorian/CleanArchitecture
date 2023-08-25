@@ -10,13 +10,20 @@ namespace NorthWind.Mongo.Repositories
         public static IServiceCollection AddMongoRepositories(
             this IServiceCollection services,
             IConfiguration configuration,
-            string connectionStringName)
+            string connectionStringName, string mongoSettingsName)
         {
 
-            var mongoClient = new MongoClient(configuration.GetConnectionString(connectionStringName));
-            var mongoDatabase = mongoClient.GetDatabase("NorthWindDB");
+            services.Configure<MongoDBSettings>(configuration.GetSection(mongoSettingsName));
+            var mongoDBSettings = configuration.GetSection(mongoSettingsName).Get<MongoDBSettings>();
 
-            services.AddSingleton<IMongoDatabase>(mongoDatabase);
+            services.AddSingleton<IMongoDatabase>(options =>
+            {
+                var client = new MongoClient(configuration.GetConnectionString(connectionStringName));
+                return client.GetDatabase(mongoDBSettings.Database);
+            });
+
+
+
             services.AddScoped<INorthWindConsumerCommandsRepository, NorthWindConsumerCommandsRepository>();
 
             return services;

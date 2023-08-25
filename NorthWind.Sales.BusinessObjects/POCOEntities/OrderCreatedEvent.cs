@@ -4,6 +4,7 @@ namespace NorthWind.Sales.BusinessObjects.POCOEntities
 {
     public class OrderCreatedEvent : Event
     {
+        public int Id { get; set; }
         public string CustomerId { get; set; }
         public string ShipAddress { get; set; }
         public string ShipCity { get; set; }

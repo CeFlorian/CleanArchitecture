@@ -8,26 +8,28 @@ namespace NorthWind.Sales.IoC
         public static IServiceCollection AddNorthWindSalesServices(
             this IServiceCollection services,
             IConfiguration configuration,
-            string connectionStringName, string connectionStringNameMongo)
+            string connectionStringName, string connectionStringNameMongo, string mongoSettingsName,
+            string messageBrokerHost)
         {
             services
                 .AddRepositories(configuration, connectionStringName)
-                .AddMongoRepositories(configuration, connectionStringNameMongo)
+                .AddMongoRepositories(configuration, connectionStringNameMongo, mongoSettingsName)
                 .AddUseCasesServices()
                 .AddPresenters()
                 .AddNorthWindSalesControllers()
-                .AddBusServices(configuration);
+                .AddBusServices(configuration, messageBrokerHost);
 
             return services;
         }
 
         public static IServiceCollection AddNorthWindConsumerServices(
             this IServiceCollection services,
-            IConfiguration configuration, string connectionStringNameMongo)
+            IConfiguration configuration, string connectionStringNameMongo, string mongoSettingsName,
+            string messageBrokerHost)
         {
             services
-                .AddMongoRepositories(configuration, connectionStringNameMongo)
-                .AddBusServices(configuration);
+                .AddMongoRepositories(configuration, connectionStringNameMongo, mongoSettingsName)
+                .AddBusServices(configuration, messageBrokerHost);
 
             return services;
         }

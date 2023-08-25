@@ -17,6 +17,7 @@ namespace NorthWind.Sales.UseCases.CreateOrder
         {
             OrderAggregate orderAggregate = new OrderAggregate
             {
+                Id = @event.Id,
                 CustomerId = @event.CustomerId,
                 ShipAddress = @event.ShipAddress,
                 ShipCity = @event.ShipCity,

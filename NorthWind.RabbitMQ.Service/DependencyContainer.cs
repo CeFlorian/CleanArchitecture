@@ -10,14 +10,14 @@ namespace NorthWind.RabbitMQ.Service
     {
         public static IServiceCollection AddBusServices(
             this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration, string messageBrokerHost)
         {
 
             //Domain Bus
             services.AddTransient<IEventBus, RabbitMqBus>(sp =>
             {
                 var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-                return new RabbitMqBus(scopeFactory, configuration.GetSection("MessageBroker:Host").Value, sp.GetService<ILogger<RabbitMqBus>>());
+                return new RabbitMqBus(scopeFactory, configuration.GetSection(messageBrokerHost).Value, sp.GetService<ILogger<RabbitMqBus>>());
             });
 
             //Subscriptions
