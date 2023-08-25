@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
+using NorthWind.Sales.UseCases.CreateOrder;
 
 namespace NorthWind.RabbitMQ.Service
 {
@@ -11,11 +12,16 @@ namespace NorthWind.RabbitMQ.Service
             this IServiceCollection services,
             IConfiguration configuration)
         {
+
+            //Domain Bus
             services.AddTransient<IEventBus, RabbitMqBus>(sp =>
             {
                 var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
                 return new RabbitMqBus(scopeFactory, configuration.GetSection("MessageBroker:Host").Value, sp.GetService<ILogger<RabbitMqBus>>());
             });
+
+            //Subscriptions
+            services.AddTransient<OrderCreatedEventHandler>();
 
             return services;
         }

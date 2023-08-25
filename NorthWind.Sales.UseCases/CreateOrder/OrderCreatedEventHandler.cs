@@ -1,14 +1,15 @@
 ﻿using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
+using NorthWind.Sales.BusinessObjects.Interfaces.Repositories.Consumer;
 using NorthWind.Sales.BusinessObjects.POCOEntities;
 
-namespace MicroRabbit.Transfer.Application.EventHandler
+namespace NorthWind.Sales.UseCases.CreateOrder
 {
     public class OrderCreatedEventHandler : IEventHandler<OrderCreatedEvent>
     {
 
-        readonly INorthWindSalesCommandsRepository Repository;
+        readonly INorthWindConsumerCommandsRepository Repository;
 
-        public OrderCreatedEventHandler(INorthWindSalesCommandsRepository repository)
+        public OrderCreatedEventHandler(INorthWindConsumerCommandsRepository repository)
         {
             Repository = repository;
         }
@@ -29,7 +30,6 @@ namespace MicroRabbit.Transfer.Application.EventHandler
             }
 
             await Repository.CreateOrder(orderAggregate);
-            await Repository.SaveChanges();
 
             return true;
 

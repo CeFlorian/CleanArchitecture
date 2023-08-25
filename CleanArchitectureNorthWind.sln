@@ -37,9 +37,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UIs", "UIs", "{46F1AC94-67C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Sales.API", "NorthWind.Sales.API\NorthWind.Sales.API.csproj", "{7AD15C3C-6264-4DF9-BACB-5BF5622789E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.RabbitMQ.Service", "NorthWind.RabbitMQ.Service\NorthWind.RabbitMQ.Service.csproj", "{DD624E6E-A613-4617-BC18-475D019AB9E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.RabbitMQ.Service", "NorthWind.RabbitMQ.Service\NorthWind.RabbitMQ.Service.csproj", "{DD624E6E-A613-4617-BC18-475D019AB9E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Consumer.API", "NorthWind.Consumer.API\NorthWind.Consumer.API.csproj", "{46D88EA9-547B-4ACB-B4A5-F4E368F1050D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthWind.Consumer.API", "NorthWind.Consumer.API\NorthWind.Consumer.API.csproj", "{46D88EA9-547B-4ACB-B4A5-F4E368F1050D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Mongo.Repositories", "NorthWind.Mongo.Repositories\NorthWind.Mongo.Repositories.csproj", "{A0BF0B97-3B84-403A-B48A-74A287E6B370}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{46D88EA9-547B-4ACB-B4A5-F4E368F1050D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46D88EA9-547B-4ACB-B4A5-F4E368F1050D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46D88EA9-547B-4ACB-B4A5-F4E368F1050D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0BF0B97-3B84-403A-B48A-74A287E6B370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0BF0B97-3B84-403A-B48A-74A287E6B370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0BF0B97-3B84-403A-B48A-74A287E6B370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0BF0B97-3B84-403A-B48A-74A287E6B370}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{7AD15C3C-6264-4DF9-BACB-5BF5622789E2} = {46F1AC94-67CB-4B52-9878-3EC78EF4A47C}
 		{DD624E6E-A613-4617-BC18-475D019AB9E9} = {078F4C4F-6FDA-469F-A701-7CD9B50F278C}
 		{46D88EA9-547B-4ACB-B4A5-F4E368F1050D} = {46F1AC94-67CB-4B52-9878-3EC78EF4A47C}
+		{A0BF0B97-3B84-403A-B48A-74A287E6B370} = {078F4C4F-6FDA-469F-A701-7CD9B50F278C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90ACBE69-4268-4CFA-A92C-1299F44B1A8E}

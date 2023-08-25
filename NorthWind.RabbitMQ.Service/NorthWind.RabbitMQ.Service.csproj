@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NorthWind.Sales.BusinessObjects\NorthWind.Sales.BusinessObjects.csproj" />
+    <ProjectReference Include="..\NorthWind.Sales.UseCases\NorthWind.Sales.UseCases.csproj" />
   </ItemGroup>
 
 </Project>

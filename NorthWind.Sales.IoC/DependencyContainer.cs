@@ -1,4 +1,5 @@
-﻿using NorthWind.RabbitMQ.Service;
+﻿using NorthWind.Mongo.Repositories;
+using NorthWind.RabbitMQ.Service;
 
 namespace NorthWind.Sales.IoC
 {
@@ -7,22 +8,25 @@ namespace NorthWind.Sales.IoC
         public static IServiceCollection AddNorthWindSalesServices(
             this IServiceCollection services,
             IConfiguration configuration,
-            string connectionStringName)
+            string connectionStringName, string connectionStringNameMongo)
         {
             services
                 .AddRepositories(configuration, connectionStringName)
+                .AddMongoRepositories(configuration, connectionStringNameMongo)
                 .AddUseCasesServices()
                 .AddPresenters()
-                .AddNorthWindSalesControllers();
+                .AddNorthWindSalesControllers()
+                .AddBusServices(configuration);
 
             return services;
         }
 
         public static IServiceCollection AddNorthWindConsumerServices(
             this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration, string connectionStringNameMongo)
         {
             services
+                .AddMongoRepositories(configuration, connectionStringNameMongo)
                 .AddBusServices(configuration);
 
             return services;

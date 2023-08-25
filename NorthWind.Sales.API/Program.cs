@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Registrar los servicios de la aplicación
 builder.Services.AddNorthWindSalesServices(
-    builder.Configuration, "NorthWindDB");
+    builder.Configuration, "NorthWindDB", "MongoDB");
 
 builder.Services.AddControllers();
 
@@ -41,11 +41,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseHttpsRedirection();
+}
+
 
 // Agregar el Middleware CORS
 app.UseCors();
 
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

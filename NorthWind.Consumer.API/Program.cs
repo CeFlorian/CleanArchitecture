@@ -1,14 +1,14 @@
-using MicroRabbit.Transfer.Application.EventHandler;
 using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
 using NorthWind.Sales.BusinessObjects.POCOEntities;
 using NorthWind.Sales.IoC;
+using NorthWind.Sales.UseCases.CreateOrder;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Registrar los servicios de la aplicación
 builder.Services.AddNorthWindConsumerServices(
-    builder.Configuration);
+    builder.Configuration, "MongoDB");
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
