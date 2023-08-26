@@ -7,11 +7,11 @@ namespace NorthWind.Sales.UseCases.CreateOrder
     {
         readonly ICreateOrderOutputPort OutputPort;
         readonly INorthWindSalesCommandsRepository Repository;
-        readonly IEventBus EventBus;
+        readonly IEventBusProducer EventBus;
 
 
         public CreateOrderInteractor(ICreateOrderOutputPort outputPort,
-            INorthWindSalesCommandsRepository repository, IEventBus eventBus)
+            INorthWindSalesCommandsRepository repository, IEventBusProducer eventBus)
         {
             OutputPort = outputPort;
             Repository = repository;
@@ -38,7 +38,7 @@ namespace NorthWind.Sales.UseCases.CreateOrder
             await Repository.SaveChanges();
             await OutputPort.Handle(orderAggregate.Id);
 
-            EventBus.Publish(new OrderCreatedEvent()
+            await EventBus.Publish(new OrderCreatedEvent()
             {
                 Id = orderAggregate.Id,
                 CustomerId = orderAggregate.CustomerId,

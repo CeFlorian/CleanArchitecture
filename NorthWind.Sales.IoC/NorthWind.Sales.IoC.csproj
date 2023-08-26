@@ -14,10 +14,11 @@
   <ItemGroup>
     <ProjectReference Include="..\NorthWind.EFCore.Repositories\NorthWind.EFCore.Repositories.csproj" />
     <ProjectReference Include="..\NorthWind.Mongo.Repositories\NorthWind.Mongo.Repositories.csproj" />
-    <ProjectReference Include="..\NorthWind.RabbitMQ.Service\NorthWind.RabbitMQ.Service.csproj" />
+    <ProjectReference Include="..\NorthWind.RabbitMQ.Service\NorthWind.RabbitMQProducer.Services.csproj" />
     <ProjectReference Include="..\NorthWind.Sales.Controllers\NorthWind.Sales.Controllers.csproj" />
     <ProjectReference Include="..\NorthWind.Sales.Presenters\NorthWind.Sales.Presenters.csproj" />
     <ProjectReference Include="..\NorthWind.Sales.UseCases\NorthWind.Sales.UseCases.csproj" />
+    <ProjectReference Include="..\NorthWindRabbitMQConsumer.Services\NorthWindRabbitMQConsumer.Services.csproj" />
   </ItemGroup>
 
 </Project>

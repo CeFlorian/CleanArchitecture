@@ -1,5 +1,6 @@
 ﻿using NorthWind.Mongo.Repositories;
-using NorthWind.RabbitMQ.Service;
+using NorthWind.RabbitMQProducer.Services;
+using NorthWindRabbitMQConsumer.Services;
 
 namespace NorthWind.Sales.IoC
 {
@@ -8,16 +9,14 @@ namespace NorthWind.Sales.IoC
         public static IServiceCollection AddNorthWindSalesServices(
             this IServiceCollection services,
             IConfiguration configuration,
-            string connectionStringName, string connectionStringNameMongo, string mongoSettingsName,
-            string messageBrokerHost)
+            string connectionStringName, string rabbitMQSettingsName)
         {
             services
                 .AddRepositories(configuration, connectionStringName)
-                .AddMongoRepositories(configuration, connectionStringNameMongo, mongoSettingsName)
                 .AddUseCasesServices()
                 .AddPresenters()
                 .AddNorthWindSalesControllers()
-                .AddBusServices(configuration, messageBrokerHost);
+                .AddProducerServices(configuration, rabbitMQSettingsName);
 
             return services;
         }
@@ -25,11 +24,11 @@ namespace NorthWind.Sales.IoC
         public static IServiceCollection AddNorthWindConsumerServices(
             this IServiceCollection services,
             IConfiguration configuration, string connectionStringNameMongo, string mongoSettingsName,
-            string messageBrokerHost)
+            string rabbitMQSettingsName)
         {
             services
                 .AddMongoRepositories(configuration, connectionStringNameMongo, mongoSettingsName)
-                .AddBusServices(configuration, messageBrokerHost);
+                .AddConsumerServices(configuration, rabbitMQSettingsName);
 
             return services;
         }

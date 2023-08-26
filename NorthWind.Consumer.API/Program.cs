@@ -1,14 +1,15 @@
-using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
-using NorthWind.Sales.BusinessObjects.POCOEntities;
 using NorthWind.Sales.IoC;
-using NorthWind.Sales.UseCases.CreateOrder;
+using NorthWindRabbitMQConsumer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Registrar los servicios de la aplicación
 builder.Services.AddNorthWindConsumerServices(
-    builder.Configuration, "MongoDB", "MongoDBSettings", "MessageBroker:Host");
+    builder.Configuration, "MongoDB", "MongoDBSettings", "RabbitMQSettings");
+
+// Opcion No.2 - Usar un servicio hospedado:
+builder.Services.AddHostedService<ConsumerHostedService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -33,7 +34,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-var eventBus = app.Services.GetRequiredService<IEventBus>();
-eventBus.Subscribe<OrderCreatedEvent, OrderCreatedEventHandler>();
+// Opcion No.1 - Suscripción directa en el método Configure:
+//var eventBus = app.Services.GetRequiredService<IEventBus>();
+//eventBus.Subscribe<OrderCreatedEvent, OrderCreatedEventHandler>();
 
 app.Run();

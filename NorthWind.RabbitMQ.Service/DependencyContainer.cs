@@ -2,26 +2,29 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
-using NorthWind.Sales.UseCases.CreateOrder;
 
-namespace NorthWind.RabbitMQ.Service
+namespace NorthWind.RabbitMQProducer.Services
 {
     public static class DependencyContainer
     {
-        public static IServiceCollection AddBusServices(
+        public static IServiceCollection AddProducerServices(
             this IServiceCollection services,
-            IConfiguration configuration, string messageBrokerHost)
+            IConfiguration configuration, string rabbitMQSettingsName)
         {
 
+            services.Configure<RabbitMQSettingsProducer>(configuration.GetSection(rabbitMQSettingsName));
+            var rabbitMQSettings = configuration.GetSection(rabbitMQSettingsName).Get<RabbitMQSettingsProducer>();
+
             //Domain Bus
-            services.AddTransient<IEventBus, RabbitMqBus>(sp =>
+            services.AddTransient<IEventBusProducer, RabbitMQBusProducer>(sp =>
             {
-                var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-                return new RabbitMqBus(scopeFactory, configuration.GetSection(messageBrokerHost).Value, sp.GetService<ILogger<RabbitMqBus>>());
+                return new RabbitMQBusProducer(rabbitMQSettings, sp.GetService<ILogger<RabbitMQBusProducer>>());
             });
 
+            //services.AddTransient<IEventBusProducer, RabbitMQBusProducer>();
+
             //Subscriptions
-            services.AddTransient<OrderCreatedEventHandler>();
+            //services.AddTransient<OrderCreatedEventHandler>();
 
             return services;
         }

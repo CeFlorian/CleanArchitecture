@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Registrar los servicios de la aplicación
 builder.Services.AddNorthWindSalesServices(
-    builder.Configuration, "NorthWindDB", "MongoDB", "MongoDBSettings", "MessageBroker:Host");
+    builder.Configuration, "NorthWindDB", "RabbitMQSettings");
 
 builder.Services.AddControllers();
 

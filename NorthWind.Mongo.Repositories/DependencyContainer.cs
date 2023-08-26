@@ -22,8 +22,6 @@ namespace NorthWind.Mongo.Repositories
                 return client.GetDatabase(mongoDBSettings.Database);
             });
 
-
-
             services.AddScoped<INorthWindConsumerCommandsRepository, NorthWindConsumerCommandsRepository>();
 
             return services;

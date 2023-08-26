@@ -15,24 +15,32 @@ namespace NorthWind.Sales.UseCases.CreateOrder
         }
         public async Task<bool> Handle(OrderCreatedEvent @event)
         {
-            OrderAggregate orderAggregate = new OrderAggregate
+            try
             {
-                Id = @event.Id,
-                CustomerId = @event.CustomerId,
-                ShipAddress = @event.ShipAddress,
-                ShipCity = @event.ShipCity,
-                ShipCountry = @event.ShipCountry,
-                ShipPostalCode = @event.ShipPostalCode
-            };
+                OrderAggregate orderAggregate = new OrderAggregate
+                {
+                    Id = @event.Id,
+                    CustomerId = @event.CustomerId,
+                    ShipAddress = @event.ShipAddress,
+                    ShipCity = @event.ShipCity,
+                    ShipCountry = @event.ShipCountry,
+                    ShipPostalCode = @event.ShipPostalCode
+                };
 
-            foreach (var item in @event.OrderDetails)
-            {
-                orderAggregate.AddDetail(item.ProductId, item.UnitPrice, item.Quantity);
+                foreach (var item in @event.OrderDetails)
+                {
+                    orderAggregate.AddDetail(item.ProductId, item.UnitPrice, item.Quantity);
+                }
+
+                await Repository.CreateOrder(orderAggregate);
+
+                return true;
+
             }
-
-            await Repository.CreateOrder(orderAggregate);
-
-            return true;
+            catch (Exception ex)
+            {
+                return false;
+            }
 
         }
 
