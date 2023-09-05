@@ -19,6 +19,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.21" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Testcontainers.MongoDb" Version="3.4.0" />
+    <PackageReference Include="Testcontainers.MsSql" Version="3.4.0" />
+    <PackageReference Include="Testcontainers.RabbitMq" Version="3.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NorthWind.Sales.API\NorthWind.Sales.API.csproj" />
   </ItemGroup>
 
 </Project>

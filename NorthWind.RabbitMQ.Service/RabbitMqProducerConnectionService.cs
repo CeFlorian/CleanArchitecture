@@ -15,12 +15,12 @@ namespace NorthWind.RabbitMQProducer.Services
             ConnectionFactory connection = new ConnectionFactory()
             {
                 HostName = Settings.HostName,
-                Port = Settings.Port,
+                Port = Convert.ToInt32(Settings.Port),
                 UserName = Settings.UserName,
                 Password = Settings.Password,
             };
 
-            var channel = connection.CreateConnection();
+            var channel = connection.CreateConnection(Settings.ProducerConnectionName);
             return channel;
         }
     }

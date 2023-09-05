@@ -23,7 +23,7 @@ namespace NorthWInd.UnitTest.Unit
             {
                 ProducerConnectionName = "TestConnection",
                 HostName = "localhost",
-                Port = 5672,
+                Port = "5672",
                 UserName = "guest",
                 Password = "guest",
                 ExchangeName = "test-exchange",

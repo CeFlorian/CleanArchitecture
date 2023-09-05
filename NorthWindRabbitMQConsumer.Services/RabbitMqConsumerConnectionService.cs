@@ -15,13 +15,13 @@ namespace NorthWindRabbitMQConsumer.Services
             ConnectionFactory connection = new ConnectionFactory()
             {
                 HostName = Settings.HostName,
-                Port = Settings.Port,
+                Port = Convert.ToInt32(Settings.Port),
                 UserName = Settings.UserName,
                 Password = Settings.Password,
                 DispatchConsumersAsync = true
             };
 
-            var channel = connection.CreateConnection();
+            var channel = connection.CreateConnection(Settings.ConsumerConnectionName);
             return channel;
         }
     }

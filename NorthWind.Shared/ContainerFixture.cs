@@ -4,9 +4,9 @@ using Testcontainers.MongoDb;
 using Testcontainers.MsSql;
 using Testcontainers.RabbitMq;
 
-namespace NorthWind.IntegrationTest
+namespace NorthWind.Shared
 {
-    public class ContainerFixtureIntegration : IAsyncDisposable
+    public class ContainerFixture : IAsyncDisposable
     {
 
         readonly MongoDbContainer MongoDB;
@@ -14,7 +14,7 @@ namespace NorthWind.IntegrationTest
         readonly MsSqlContainer SQLServer;
         readonly INetwork Network;
 
-        public ContainerFixtureIntegration()
+        public ContainerFixture()
         {
 
             //const string connectionString = $"server=SQLServerIntegrationTest;user id={MsSqlBuilder.DefaultUsername};password={MsSqlBuilder.DefaultPassword};database={MsSqlBuilder.DefaultDatabase}";
@@ -30,8 +30,10 @@ namespace NorthWind.IntegrationTest
                 .WithName("RabbitMQIntegrationTest-" + Guid.NewGuid().ToString())
                 .WithUsername("root")
                 .WithPassword("Ab12345678")
-                .WithPortBinding("15673", "15672")
-                .WithPortBinding("5673", "5672")
+                .WithPortBinding("15672", true)
+                .WithPortBinding("5672", true)
+                //.WithPortBinding("15673", "15672")
+                //.WithPortBinding("5673", "5672")
                 .WithNetwork(Network)
                 .WithNetworkAliases("RabbitMQIntegrationTest")
                 .Build();
@@ -41,7 +43,8 @@ namespace NorthWind.IntegrationTest
                 .WithName("MongoDBIntegrationTest-" + Guid.NewGuid().ToString())
                 .WithUsername("root")
                 .WithPassword("Ab12345678")
-                .WithPortBinding("27018", "27017")
+                .WithPortBinding("27017", true)
+                //.WithPortBinding("27018", "27017")
                 .DependsOn(RabbitMQ)
                 .WithNetwork(Network)
                 .WithNetworkAliases("MongoDBIntegrationTest")
@@ -55,7 +58,8 @@ namespace NorthWind.IntegrationTest
                 .WithPassword("Ab12345678")
                 //.WithEnvironment("SA_PASSWORD", "Ab12345678")
                 //.WithEnvironment("MSSQL_SA_PASSWORD", "Ab12345678")
-                .WithPortBinding("1434", "1433")
+                .WithPortBinding("1433", true)
+                //.WithPortBinding("1434", "1433")
                 .WithNetwork(Network)
                 .WithNetworkAliases("SQLServerIntegrationTest")
                 .Build();
@@ -92,19 +96,63 @@ namespace NorthWind.IntegrationTest
             return SQLServer.StopAsync();
         }
 
-        public Task SQLServerDispose()
+        public ValueTask SQLServerDispose()
         {
-            return SQLServer.DisposeAsync().AsTask();
+            return SQLServer.DisposeAsync();
         }
 
-        public Task RabbitMQDispose()
+        public ValueTask RabbitMQDispose()
         {
-            return RabbitMQ.DisposeAsync().AsTask();
+            return RabbitMQ.DisposeAsync();
         }
 
-        public Task MongoDBDispose()
+        public ValueTask MongoDBDispose()
         {
-            return MongoDB.DisposeAsync().AsTask();
+            return MongoDB.DisposeAsync();
+        }
+
+        public string GetMongoDBHostPort()
+        {
+            return MongoDB.GetMappedPublicPort("27017").ToString();
+        }
+
+        public string GetMongoDBHostname()
+        {
+            return MongoDB.Hostname;
+        }
+
+        public string GetSQLServerHostPort()
+        {
+            return SQLServer.GetMappedPublicPort("1433").ToString();
+        }
+
+        public string GetSQLServerHostname()
+        {
+            return SQLServer.Hostname;
+        }
+        public string GetRabbitMQHostPort()
+        {
+            return RabbitMQ.GetMappedPublicPort("5672").ToString();
+        }
+
+        public string GetRabbitMQHostname()
+        {
+            return RabbitMQ.Hostname;
+        }
+
+        public string GetMongoDBConnectionString()
+        {
+            return MongoDB.GetConnectionString();
+        }
+
+        public string GetSQLServerConnectionString()
+        {
+            return SQLServer.GetConnectionString();
+        }
+
+        public string GetRabbitMQConnectionString()
+        {
+            return RabbitMQ.GetConnectionString();
         }
 
 

@@ -2,22 +2,23 @@
 using NorthWind.EFCore.Repositories.DataContexts;
 using NorthWind.Sales.BusinessObjects.Aggregates;
 using NorthWind.Sales.BusinessObjects.Interfaces.Repositories;
+using NorthWind.Shared;
 
 namespace NorthWind.IntegrationTest.Integration
 {
     public class NorthWindSalesCommandsRepositoryTests : IAsyncLifetime
     {
 
-        readonly ContainerFixtureIntegration ContainerFixture;
+        readonly ContainerFixture ContainerFixture;
 
         public NorthWindSalesCommandsRepositoryTests()
         {
-            ContainerFixture = new ContainerFixtureIntegration();
+            ContainerFixture = new ContainerFixture();
         }
 
         public Task InitializeAsync()
         {
-            return ContainerFixture.InitializeAsync();
+            return ContainerFixture.SQLServerStart();
         }
 
         public Task DisposeAsync()
@@ -30,8 +31,14 @@ namespace NorthWind.IntegrationTest.Integration
         public async Task CreateOrder_AddsOrderAndDetailsToContext()
         {
 
+            Dictionary<string, string> keyValues = new Dictionary<string, string>
+            {
+                {"ConnectionStrings:NorthWindDB", ContainerFixture.GetSQLServerConnectionString()},
+
+            };
+
             //using var application = CustomApplicationBuilder.Build((services, configuration) => services.AddScoped<IEventBusProducer, RabbitMQBusProducer>());
-            using var application = IntegrationApplicationBuilder.Build();
+            using var application = CustomApplicationBuilder.Build(keyValues);
             using var scope = application.Services.CreateScope();
 
             var context = scope.ServiceProvider.GetRequiredService<NorthWindSalesContext>();

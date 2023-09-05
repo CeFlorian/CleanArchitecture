@@ -1,7 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using NorthWind.EFCore.Repositories.DataContexts;
 using NorthWind.Sales.BusinessObjects.DTOs.CreateOrder;
+using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
 using NorthWind.Sales.BusinessObjects.POCOEntities;
+using NorthWind.Sales.UseCases.CreateOrder;
+using NorthWind.Shared;
 using System.Net.Http.Json;
 
 namespace NorthWind.E2ETest.E2E
@@ -9,11 +12,11 @@ namespace NorthWind.E2ETest.E2E
     public class OrderControllerEndpointsTests : IAsyncLifetime
     {
 
-        readonly ContainerFixtureE2E ContainerFixture;
+        readonly ContainerFixture ContainerFixture;
 
         public OrderControllerEndpointsTests()
         {
-            ContainerFixture = new ContainerFixtureE2E();
+            ContainerFixture = new ContainerFixture();
         }
 
         public Task InitializeAsync()
@@ -42,7 +45,18 @@ namespace NorthWind.E2ETest.E2E
         public async Task Post_Endpoint_Returns_SuccessStatusCode_And_Get_Endpoint()
         {
 
-            using var application = E2EApplicationBuilder.Build();
+            Dictionary<string, string> keyValues = new Dictionary<string, string>
+            {
+                {"ConnectionStrings:MongoDB", ContainerFixture.GetMongoDBConnectionString()},
+                {"ConnectionStrings:NorthWindDB", ContainerFixture.GetSQLServerConnectionString()},
+                {"RabbitMQSettingsProducer:HostName", ContainerFixture.GetRabbitMQHostname()},
+                {"RabbitMQSettingsProducer:Port", ContainerFixture.GetRabbitMQHostPort()},
+                {"RabbitMQSettingsConsumer:HostName", ContainerFixture.GetRabbitMQHostname()},
+                {"RabbitMQSettingsConsumer:Port", ContainerFixture.GetRabbitMQHostPort()}
+
+            };
+
+            using var application = CustomApplicationBuilder.Build(keyValues);
             using var client = application.CreateClient();
 
             using var scope = application.Services.CreateScope();
@@ -51,6 +65,10 @@ namespace NorthWind.E2ETest.E2E
 
             // Para asegurar de que la base de datos física exista y tenga la estructura adecuada según el modelo de datos definido en el contexto
             context.Database.EnsureCreated();
+
+            var rabbitMQBusConsumer = application.Services.GetRequiredService<IEventBusConsumer>();
+
+            await rabbitMQBusConsumer.Subscribe<OrderCreatedEvent, OrderCreatedEventHandler>();
 
 
             var orderDetails = new List<CreateOrderDetailDTO>
@@ -87,6 +105,9 @@ namespace NorthWind.E2ETest.E2E
             responseGet.EnsureSuccessStatusCode();
 
             var orders = responseGet.Content.ReadFromJsonAsync<ResponseOrder<IEnumerable<Order>>>().Result.Value;
+
+            await rabbitMQBusConsumer.Unsubscribe<OrderCreatedEvent, OrderCreatedEventHandler>();
+
 
             // Verifica que se haya devuelto una colección no nula y que contenga al menos un elemento
             Assert.NotNull(orders);

@@ -128,7 +128,7 @@ namespace NorthWInd.UnitTest.Unit
             {
                 ConsumerConnectionName = "test-connection",
                 HostName = "localhost",
-                Port = 5672,
+                Port = "5672",
                 UserName = "guest",
                 Password = "guest",
                 ExchangeName = "test-exchange",

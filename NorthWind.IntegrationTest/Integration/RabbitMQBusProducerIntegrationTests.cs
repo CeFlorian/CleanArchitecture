@@ -4,6 +4,7 @@ using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
 using NorthWind.Sales.BusinessObjects.Interfaces.Repositories.Consumer;
 using NorthWind.Sales.BusinessObjects.POCOEntities;
 using NorthWind.Sales.UseCases.CreateOrder;
+using NorthWind.Shared;
 
 namespace NorthWind.IntegrationTest.Integration
 {
@@ -19,16 +20,19 @@ namespace NorthWind.IntegrationTest.Integration
         //    ApplicationFactory = factory;
         //}
 
-        readonly ContainerFixtureIntegration ContainerFixture;
+        readonly ContainerFixture ContainerFixture;
 
         public RabbitMQBusProducerIntegrationTests()
         {
-            ContainerFixture = new ContainerFixtureIntegration();
+            ContainerFixture = new ContainerFixture();
         }
 
         public Task InitializeAsync()
         {
-            return ContainerFixture.InitializeAsync();
+            Task rabbit = ContainerFixture.RabbitMQStart();
+            Task mongo = ContainerFixture.MongoDBStart();
+
+            return Task.WhenAll(rabbit, mongo);
         }
 
         public Task DisposeAsync()
@@ -41,8 +45,18 @@ namespace NorthWind.IntegrationTest.Integration
         public async Task Publish_WithCustomConnectionFactory_ProducesMessage()
         {
 
+            Dictionary<string, string> keyValues = new Dictionary<string, string>
+            {
+                {"ConnectionStrings:MongoDB", ContainerFixture.GetMongoDBConnectionString()},
+                {"RabbitMQSettingsProducer:HostName", ContainerFixture.GetRabbitMQHostname()},
+                {"RabbitMQSettingsProducer:Port", ContainerFixture.GetRabbitMQHostPort()},
+                {"RabbitMQSettingsConsumer:HostName", ContainerFixture.GetRabbitMQHostname()},
+                {"RabbitMQSettingsConsumer:Port", ContainerFixture.GetRabbitMQHostPort()}
+
+            };
+
             //using var application = CustomApplicationBuilder.Build((services, configuration) => services.AddScoped<IEventBusProducer, RabbitMQBusProducer>());
-            using var application = IntegrationApplicationBuilder.Build();
+            using var application = CustomApplicationBuilder.Build(keyValues);
             using var scope = application.Services.CreateScope();
 
             // Arrange

@@ -9,18 +9,17 @@ using NorthWind.Mongo.Repositories;
 using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
 using NorthWind.Sales.BusinessObjects.Interfaces.Repositories.Consumer;
 using NorthWind.Sales.UseCases.CreateOrder;
-using NorthWind.Shared;
 using NorthWindRabbitMQConsumer.Services;
 
-namespace NorthWind.E2ETest
+namespace NorthWind.Shared
 {
-    public static class E2EApplicationBuilder
+    public static class CustomApplicationBuilder
     {
-        public static WebApplicationFactory<Program> Build(Action<IServiceCollection, IConfiguration> configureServices)
+        public static WebApplicationFactory<Program> Build(Action<IServiceCollection, IConfiguration> configureServices, Dictionary<string, string>? keyValues = null)
             => new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
             {
 
-                IConfigurationRoot testConfiguration = TestConfiguration.Get();
+                IConfigurationRoot testConfiguration = TestConfiguration.Get(keyValues);
 
                 builder.UseConfiguration(testConfiguration);
 
@@ -78,15 +77,31 @@ namespace NorthWind.E2ETest
 
                 //});
 
+                //if (keyValues?.Count > 0)
+                //{
+                //    builder.ConfigureAppConfiguration((context, configBuilder) =>
+                //    {
+                //        configBuilder.AddInMemoryCollection(keyValues);
+
+                //        //configBuilder.AddInMemoryCollection(new Dictionary<string, string>
+                //        //{
+                //        //    ["RawConfigProperty"] = "OverriddenValue"
+                //        //});
+
+                //    });
+                //}
+
+
             });
 
-        public static WebApplicationFactory<Program> Build()
+        //Anular propiedad con colección en memoria utilizando Dictionary<string, string>
+        public static WebApplicationFactory<Program> Build(Dictionary<string, string>? keyValues = null)
         {
             /* Si la llamada al metodo Build no trae el parametro ("Action<IServiceCollection, IConfiguration> configureServices" que es un delegado, action, lambda), como resultado,
                en vez de la accion configureServices(services, testConfiguration) se asignara una accion vacia (un lambda vacío) { } que no realiza ninguna operacion en services, por lo tanto,
                se crea una instancia con una configuración predeterminada para la aplicacion a la que hace referencia la clase Program
             */
-            return Build((_, __) => { });
+            return Build((_, __) => { }, keyValues);
         }
     }
 }
