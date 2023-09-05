@@ -13,16 +13,19 @@ namespace NorthWind.Mongo.Repositories
             string connectionStringName, string mongoSettingsName)
         {
 
-            services.Configure<MongoDBSettings>(configuration.GetSection(mongoSettingsName));
-            var mongoDBSettings = configuration.GetSection(mongoSettingsName).Get<MongoDBSettings>();
+            services.Configure<MongoDBSettings>(configuration.GetRequiredSection(mongoSettingsName));
+            var mongoDBSettings = configuration.GetRequiredSection(mongoSettingsName).Get<MongoDBSettings>();
 
-            services.AddSingleton<IMongoDatabase>(options =>
+            services.AddTransient<IMongoDatabase>(options =>
             {
                 var client = new MongoClient(configuration.GetConnectionString(connectionStringName));
                 return client.GetDatabase(mongoDBSettings.Database);
             });
 
             services.AddScoped<INorthWindConsumerCommandsRepository, NorthWindConsumerCommandsRepository>();
+
+            services.AddScoped<INorthWindConsumerQuerysRepository, NorthWindConsumerQuerysRepository>();
+
 
             return services;
         }

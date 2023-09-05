@@ -1,6 +1,6 @@
 ﻿namespace NorthWind.Sales.UseCases.GetAllOrders
 {
-    internal class GetAllOrdersInteractor : IGetAllOrdersInputPort
+    public class GetAllOrdersInteractor : IGetAllOrdersInputPort
     {
         readonly IGetAllOrdersOutputPort OutputPort;
         readonly INorthWindSalesQuerysRepository Repository;

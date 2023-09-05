@@ -1,0 +1,28 @@
+﻿using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
+
+namespace NorthWindRabbitMQConsumer.Services
+{
+    public class RabbitMqConsumerConnectionService : IRabbitMqConsumerConnectionService
+    {
+        private readonly RabbitMQSettingsConsumer Settings;
+        public RabbitMqConsumerConnectionService(IOptions<RabbitMQSettingsConsumer> options)
+        {
+            Settings = options.Value;
+        }
+        public IConnection CreateConnection()
+        {
+            ConnectionFactory connection = new ConnectionFactory()
+            {
+                HostName = Settings.HostName,
+                Port = Settings.Port,
+                UserName = Settings.UserName,
+                Password = Settings.Password,
+                DispatchConsumersAsync = true
+            };
+
+            var channel = connection.CreateConnection();
+            return channel;
+        }
+    }
+}

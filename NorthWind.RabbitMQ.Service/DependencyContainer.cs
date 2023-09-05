@@ -12,14 +12,16 @@ namespace NorthWind.RabbitMQProducer.Services
             IConfiguration configuration, string rabbitMQSettingsName)
         {
 
-            services.Configure<RabbitMQSettingsProducer>(configuration.GetSection(rabbitMQSettingsName));
-            var rabbitMQSettings = configuration.GetSection(rabbitMQSettingsName).Get<RabbitMQSettingsProducer>();
+            services.Configure<RabbitMQSettingsProducer>(configuration.GetRequiredSection(rabbitMQSettingsName));
+            var rabbitMQSettings = configuration.GetRequiredSection(rabbitMQSettingsName).Get<RabbitMQSettingsProducer>();
 
             //Domain Bus
             services.AddTransient<IEventBusProducer, RabbitMQBusProducer>(sp =>
             {
-                return new RabbitMQBusProducer(rabbitMQSettings, sp.GetService<ILogger<RabbitMQBusProducer>>());
+                return new RabbitMQBusProducer(rabbitMQSettings, sp.GetRequiredService<ILogger<RabbitMQBusProducer>>(), sp.GetRequiredService<IRabbitMqProducerConnectionService>());
             });
+
+            services.AddTransient<IRabbitMqProducerConnectionService, RabbitMqProducerConnectionService>();
 
             //services.AddTransient<IEventBusProducer, RabbitMQBusProducer>();
 

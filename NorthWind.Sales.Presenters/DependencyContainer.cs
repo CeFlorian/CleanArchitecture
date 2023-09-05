@@ -16,16 +16,16 @@
              * uno en forma de Presenter y el otro en forma de Output Port.
              */
             services.AddScoped<ICreateOrderOutputPort>(
-                provider => provider.GetService<CreateOrderPresenter>());
+                provider => provider.GetRequiredService<CreateOrderPresenter>());
 
             services.AddScoped<ICreateOrderPresenter>(
-                provider => provider.GetService<CreateOrderPresenter>());
+                provider => provider.GetRequiredService<CreateOrderPresenter>());
 
             services.AddScoped<IGetAllOrdersOutputPort>(
-                provider => provider.GetService<GetAllOrdersPresenter>());
+                provider => provider.GetRequiredService<GetAllOrdersPresenter>());
 
             services.AddScoped<IGetAllOrdersPresenter>(
-                provider => provider.GetService<GetAllOrdersPresenter>());
+                provider => provider.GetRequiredService<GetAllOrdersPresenter>());
 
             return services;
         }

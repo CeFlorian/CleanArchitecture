@@ -13,18 +13,22 @@ namespace NorthWindRabbitMQConsumer.Services
             IConfiguration configuration, string rabbitMQSettingsName)
         {
 
-            services.Configure<RabbitMQSettingsConsumer>(configuration.GetSection(rabbitMQSettingsName));
-            var rabbitMQSettings = configuration.GetSection(rabbitMQSettingsName).Get<RabbitMQSettingsConsumer>();
+            services.Configure<RabbitMQSettingsConsumer>(configuration.GetRequiredSection(rabbitMQSettingsName));
+            var rabbitMQSettings = configuration.GetRequiredSection(rabbitMQSettingsName).Get<RabbitMQSettingsConsumer>();
 
             //Domain Bus
-            services.AddTransient<IEventBusConsumer, RabbitMQBusConsumer>(sp =>
+            services.AddSingleton<IEventBusConsumer, RabbitMQBusConsumer>(sp =>
             {
                 var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-                return new RabbitMQBusConsumer(scopeFactory, rabbitMQSettings, sp.GetService<ILogger<RabbitMQBusConsumer>>());
+                return new RabbitMQBusConsumer(scopeFactory, rabbitMQSettings, sp.GetRequiredService<ILogger<RabbitMQBusConsumer>>(), sp.GetRequiredService<IRabbitMqConsumerConnectionService>());
             });
 
             //Subscriptions
             services.AddTransient<OrderCreatedEventHandler>();
+
+
+            services.AddSingleton<IRabbitMqConsumerConnectionService, RabbitMqConsumerConnectionService>();
+
 
             return services;
         }

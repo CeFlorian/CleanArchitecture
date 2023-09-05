@@ -9,10 +9,10 @@ using System.Text;
 
 namespace NorthWindRabbitMQConsumer.Services
 {
-    internal class RabbitMQBusConsumer : IEventBusConsumer
+    public class RabbitMQBusConsumer : IEventBusConsumer
     {
         readonly ILogger<RabbitMQBusConsumer> Logger;
-        readonly Dictionary<string, List<Type>> Handlers;
+        public readonly Dictionary<string, List<Type>> Handlers;
         readonly List<Type> EvenTypes;
         readonly IServiceScopeFactory ServiceScopeFactory;
         readonly RabbitMQSettingsConsumer Settings;
@@ -20,7 +20,7 @@ namespace NorthWindRabbitMQConsumer.Services
         readonly IModel Channel;
         readonly IConnection Connection;
 
-        public RabbitMQBusConsumer(IServiceScopeFactory serviceScopeFactory, RabbitMQSettingsConsumer settings, ILogger<RabbitMQBusConsumer> logger)
+        public RabbitMQBusConsumer(IServiceScopeFactory serviceScopeFactory, RabbitMQSettingsConsumer settings, ILogger<RabbitMQBusConsumer> logger, IRabbitMqConsumerConnectionService connection)
         {
             ServiceScopeFactory = serviceScopeFactory;
             Handlers = new Dictionary<string, List<Type>>();
@@ -29,16 +29,17 @@ namespace NorthWindRabbitMQConsumer.Services
             Logger = logger;
 
 
-            var factory = new ConnectionFactory()
-            {
-                HostName = Settings.HostName,
-                UserName = Settings.UserName,
-                Password = Settings.Password,
-                DispatchConsumersAsync = true
-            };
+            //var factory = new ConnectionFactory()
+            //{
+            //    HostName = Settings.HostName,
+            //    UserName = Settings.UserName,
+            //    Password = Settings.Password,
+            //    DispatchConsumersAsync = true
+            //};
 
-            // Sin utilizar "using" para que se mantenga abierta connection y channel y no se liberen los recursos
-            Connection = factory.CreateConnection(Settings.ConsumerConnectionName);
+            //// Sin utilizar "using" para que se mantenga abierta connection y channel y no se liberen los recursos
+            //Connection = factory.CreateConnection(Settings.ConsumerConnectionName);
+            Connection = connection.CreateConnection();
             Channel = Connection.CreateModel();
         }
 
@@ -115,7 +116,7 @@ namespace NorthWindRabbitMQConsumer.Services
             var eventName = typeof(T).Name;
             //channel.QueueDeclare(eventName, false, false, false, null);
 
-            Channel.ExchangeDeclare(Settings.ExchangeName, Settings.ExchangeType);
+            Channel.ExchangeDeclare(Settings.ExchangeName, Settings.ExchangeType, true, false);
             Channel.QueueDeclare(Settings.QueueName, true, false, false, null);
 
             Channel.QueueBind(Settings.QueueName, Settings.ExchangeName, Settings.Relativekey);

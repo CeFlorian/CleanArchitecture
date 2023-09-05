@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.test.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="MongoDB.Embedded" Version="2.4.6.23000" />
+    <PackageReference Include="Moq" Version="4.20.69" />
+    <PackageReference Include="NetArchTest.Rules" Version="1.3.2" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.1.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NorthWind.Consumer.API\NorthWind.Consumer.API.csproj" />
+    <ProjectReference Include="..\NorthWind.EFCore.Repositories\NorthWind.EFCore.Repositories.csproj" />
+    <ProjectReference Include="..\NorthWind.Entities\NorthWind.Entities.csproj" />
+    <ProjectReference Include="..\NorthWind.Mongo.Repositories\NorthWind.Mongo.Repositories.csproj" />
+    <ProjectReference Include="..\NorthWind.RabbitMQ.Service\NorthWind.RabbitMQProducer.Services.csproj" />
+    <ProjectReference Include="..\NorthWind.Sales.BusinessObjects\NorthWind.Sales.BusinessObjects.csproj" />
+    <ProjectReference Include="..\NorthWind.Sales.Controllers\NorthWind.Sales.Controllers.csproj" />
+    <ProjectReference Include="..\NorthWind.Sales.IoC\NorthWind.Sales.IoC.csproj" />
+    <ProjectReference Include="..\NorthWind.Sales.Presenters\NorthWind.Sales.Presenters.csproj" />
+    <ProjectReference Include="..\NorthWind.Sales.UseCases\NorthWind.Sales.UseCases.csproj" />
+    <ProjectReference Include="..\NorthWindRabbitMQConsumer.Services\NorthWindRabbitMQConsumer.Services.csproj" />
+  </ItemGroup>
+
+</Project>

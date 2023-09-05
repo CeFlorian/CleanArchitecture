@@ -2,6 +2,7 @@
 {
     public interface INorthWindConsumerQuerysRepository
     {
-        Task<IEnumerable<Order>> GetAllOrders();
+        Task<IEnumerable<OrderAggregate>> GetAllOrders();
+        Task<OrderAggregate> GetOrderById(int id);
     }
 }
