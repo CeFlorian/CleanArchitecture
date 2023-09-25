@@ -42,6 +42,33 @@ namespace NorthWind.EFCore.Repositories.Migrations
                     b.ToTable("OrderDetails");
                 });
 
+            modelBuilder.Entity("NorthWind.Sales.BusinessObjects.POCOEntities.Claim", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Claims");
+                });
+
             modelBuilder.Entity("NorthWind.Sales.BusinessObjects.POCOEntities.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -93,6 +120,80 @@ namespace NorthWind.EFCore.Repositories.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("NorthWind.Sales.BusinessObjects.POCOEntities.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Used")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("RefreshTokens");
+                });
+
+            modelBuilder.Entity("NorthWind.Sales.BusinessObjects.POCOEntities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("NorthWind.EFCore.Repositories.Entities.OrderDetail", b =>
                 {
                     b.HasOne("NorthWind.Sales.BusinessObjects.POCOEntities.Order", "Order")
@@ -102,6 +203,35 @@ namespace NorthWind.EFCore.Repositories.Migrations
                         .IsRequired();
 
                     b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("NorthWind.Sales.BusinessObjects.POCOEntities.Claim", b =>
+                {
+                    b.HasOne("NorthWind.Sales.BusinessObjects.POCOEntities.User", "User")
+                        .WithMany("Claims")
+                        .HasForeignKey("UserId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NorthWind.Sales.BusinessObjects.POCOEntities.RefreshToken", b =>
+                {
+                    b.HasOne("NorthWind.Sales.BusinessObjects.POCOEntities.User", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NorthWind.Sales.BusinessObjects.POCOEntities.User", b =>
+                {
+                    b.Navigation("Claims");
+
+                    b.Navigation("RefreshTokens");
                 });
 #pragma warning restore 612, 618
         }

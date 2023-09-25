@@ -7,6 +7,7 @@
         {
             services.AddScoped<CreateOrderPresenter>();
             services.AddScoped<GetAllOrdersPresenter>();
+            services.AddScoped<LoginPresenter>();
 
             /* 
              * La misma instancia de ese servicio será devuelta cuando sea requerido 
@@ -26,6 +27,11 @@
 
             services.AddScoped<IGetAllOrdersPresenter>(
                 provider => provider.GetRequiredService<GetAllOrdersPresenter>());
+
+            services.AddScoped<ILoginOutputPort>(
+                provider => provider.GetService<LoginPresenter>());
+            services.AddScoped<ILoginPresenter>(
+                provider => provider.GetService<LoginPresenter>());
 
             return services;
         }

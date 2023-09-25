@@ -3,19 +3,19 @@ using NorthWind.Sales.IoC;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Registrar los servicios de la aplicación
+// Registrar los servicios de la aplicaciï¿½n
 builder.Services.AddNorthWindSalesServices(
-    builder.Configuration, "NorthWindDB", "RabbitMQSettingsProducer");
+    builder.Configuration, "JwtSettings", "NorthWindDB", "APISettings", "RabbitMQSettingsProducer");
 
 builder.Services.AddControllers();
 
 // Configurar APIExplorer para descubrir y exponer
-// los metadatos de los endpoints de la aplicación.
+// los metadatos de los endpoints de la aplicaciï¿½n.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 // Agregar el generador que construye los objetos de
-// documentación de Swagger con la funcionalidad del APIExplorer.
+// documentaciï¿½n de Swagger con la funcionalidad del APIExplorer.
 builder.Services.AddSwaggerGen();
 
 // Agregar el servicio CORS para clientes que se ejecutan
@@ -38,6 +38,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -50,6 +51,7 @@ else
 // Agregar el Middleware CORS
 app.UseCors();
 
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

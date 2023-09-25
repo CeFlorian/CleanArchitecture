@@ -15,6 +15,12 @@
                 NorthWindSalesCommandsRepository>();
             services.AddScoped<INorthWindSalesQuerysRepository,
                 NorthWindSalesQuerysRepository>();
+            services.AddScoped<IUserCommandsRepository,
+                UserCommandsRepository>();
+            services.AddScoped<IUserQuerysRepository,
+                UserQuerysRepository>();
+            services.AddScoped<IRefreshTokenCommandsRepository,
+                RefreshTokenCommandsRepository>();
 
             return services;
         }

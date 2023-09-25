@@ -1,4 +1,7 @@
-﻿using NorthWind.Mongo.Repositories;
+using NorthWind.API.Services;
+using NorthWind.Token.Services;
+
+using NorthWind.Mongo.Repositories;
 using NorthWind.RabbitMQProducer.Services;
 using NorthWindRabbitMQConsumer.Services;
 
@@ -8,14 +11,16 @@ namespace NorthWind.Sales.IoC
     {
         public static IServiceCollection AddNorthWindSalesServices(
             this IServiceCollection services,
-            IConfiguration configuration,
-            string connectionStringName, string rabbitMQSettingsName)
+            IConfiguration configuration, string jwtSettingsName,
+            string connectionStringName, string apiSettingsName, string rabbitMQSettingsName)
         {
             services
                 .AddRepositories(configuration, connectionStringName)
                 .AddUseCasesServices()
                 .AddPresenters()
                 .AddNorthWindSalesControllers()
+                .AddTokenServices(configuration, jwtSettingsName)
+                .AddAPIServices(configuration, apiSettingsName)
                 .AddProducerServices(configuration, rabbitMQSettingsName);
 
             return services;

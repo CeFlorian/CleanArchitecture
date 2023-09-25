@@ -1,4 +1,5 @@
 ﻿using NorthWind.Sales.UseCases.GetAllOrders;
+using NorthWind.Sales.UseCases.Login;
 
 namespace NorthWind.Sales.UseCases
 {
@@ -9,6 +10,7 @@ namespace NorthWind.Sales.UseCases
         {
             services.AddScoped<ICreateOrderInputPort, CreateOrderInteractor>();
             services.AddScoped<IGetAllOrdersInputPort, GetAllOrdersInteractor>();
+            services.AddScoped<ILoginInputPort, LoginInteractor>();
 
             return services;
         }
