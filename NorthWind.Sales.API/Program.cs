@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Registrar los servicios de la aplicaci�n
 builder.Services.AddNorthWindSalesServices(
-    builder.Configuration, "JwtSettings", "NorthWindDB", "APISettings", "RabbitMQSettingsProducer");
+    builder.Configuration, "NorthWindDB", "JwtSettings", "NorthWindDB", "APISettings", "RabbitMQSettingsProducer");
 
 builder.Services.AddControllers();
 
@@ -51,7 +51,6 @@ else
 // Agregar el Middleware CORS
 app.UseCors();
 
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

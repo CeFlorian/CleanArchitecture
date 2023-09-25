@@ -2,7 +2,7 @@
 {
     public static class DependencyContainer
     {
-        public static IServiceCollection AddRepositories(
+        public static IServiceCollection AddEFRepositories(
             this IServiceCollection services,
             IConfiguration configuration,
             string connectionStringName)

@@ -1,3 +1,5 @@
+using NorthWind.SqlClient.Repositories;
+
 using NorthWind.API.Services;
 using NorthWind.Token.Services;
 
@@ -11,11 +13,12 @@ namespace NorthWind.Sales.IoC
     {
         public static IServiceCollection AddNorthWindSalesServices(
             this IServiceCollection services,
-            IConfiguration configuration, string jwtSettingsName,
-            string connectionStringName, string apiSettingsName, string rabbitMQSettingsName)
+            IConfiguration configuration, string connectionStringNameEF, string jwtSettingsName,
+             string connectionStringNameSqlClient, string apiSettingsName, string rabbitMQSettingsName)
         {
             services
-                .AddRepositories(configuration, connectionStringName)
+                .AddEFRepositories(configuration, connectionStringNameEF)
+                .AddSqlClientRepositories(configuration, connectionStringNameSqlClient)
                 .AddUseCasesServices()
                 .AddPresenters()
                 .AddNorthWindSalesControllers()
