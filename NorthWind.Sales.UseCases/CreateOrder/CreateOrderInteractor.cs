@@ -1,4 +1,6 @@
-﻿using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
+using NorthWind.Entities.Validators;
+
+using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
 using NorthWind.Sales.BusinessObjects.POCOEntities;
 
 namespace NorthWind.Sales.UseCases.CreateOrder
@@ -7,19 +9,29 @@ namespace NorthWind.Sales.UseCases.CreateOrder
     {
         readonly ICreateOrderOutputPort OutputPort;
         readonly INorthWindSalesCommandsRepository Repository;
+        readonly IValidatorService<CreateOrderDTO> ValidatorService;
+        readonly IEnumerable<IValidator<CreateOrderDTO>> Validators;
+
         readonly IEventBusProducer EventBus;
 
 
         public CreateOrderInteractor(ICreateOrderOutputPort outputPort,
-            INorthWindSalesCommandsRepository repository, IEventBusProducer eventBus)
+            INorthWindSalesCommandsRepository repository,
+            IValidatorService<CreateOrderDTO> validatorService,
+            IEnumerable<IValidator<CreateOrderDTO>> validators, IEventBusProducer eventBus)
         {
             OutputPort = outputPort;
             Repository = repository;
+            ValidatorService = validatorService;
+            Validators = validators;
             EventBus = eventBus;
         }
 
         public async ValueTask Handle(CreateOrderDTO orderDTO)
         {
+            //ValidatorService.Validate(orderDTO, Validators, Logger);
+            ValidatorService.Validate(orderDTO, Validators);
+
             OrderAggregate orderAggregate = new OrderAggregate
             {
                 CustomerId = orderDTO.CustomerId,

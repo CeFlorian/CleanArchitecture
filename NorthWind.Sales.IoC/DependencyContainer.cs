@@ -1,3 +1,6 @@
+using NorthWind.Entities;
+using NorthWind.Sales.BusinessObjects;
+
 using NorthWind.SqlClient.Repositories;
 
 using NorthWind.API.Services;
@@ -17,6 +20,8 @@ namespace NorthWind.Sales.IoC
              string connectionStringNameSqlClient, string apiSettingsName, string rabbitMQSettingsName)
         {
             services
+                .AddEntityServices()
+                .AddDTOValidators()
                 .AddEFRepositories(configuration, connectionStringNameEF)
                 .AddSqlClientRepositories(configuration, connectionStringNameSqlClient)
                 .AddUseCasesServices()
