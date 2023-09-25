@@ -1,3 +1,5 @@
+using NorthWind.Entities.Interfaces;
+
 using NorthWind.Entities.Validators;
 
 using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
@@ -9,6 +11,8 @@ namespace NorthWind.Sales.UseCases.CreateOrder
     {
         readonly ICreateOrderOutputPort OutputPort;
         readonly INorthWindSalesCommandsRepository Repository;
+        readonly IApplicationStatusLogger Logger;
+        readonly ILogWritableRepository LogRepository;
         readonly IValidatorService<CreateOrderDTO> ValidatorService;
         readonly IEnumerable<IValidator<CreateOrderDTO>> Validators;
 
@@ -16,12 +20,15 @@ namespace NorthWind.Sales.UseCases.CreateOrder
 
 
         public CreateOrderInteractor(ICreateOrderOutputPort outputPort,
-            INorthWindSalesCommandsRepository repository,
+            INorthWindSalesCommandsRepository repository, IApplicationStatusLogger logger,
+            ILogWritableRepository logRepository,
             IValidatorService<CreateOrderDTO> validatorService,
             IEnumerable<IValidator<CreateOrderDTO>> validators, IEventBusProducer eventBus)
         {
             OutputPort = outputPort;
             Repository = repository;
+            LogRepository = logRepository;
+            Logger = logger;
             ValidatorService = validatorService;
             Validators = validators;
             EventBus = eventBus;
@@ -47,7 +54,9 @@ namespace NorthWind.Sales.UseCases.CreateOrder
             }
 
             await Repository.CreateOrder(orderAggregate);
+            await LogRepository.Add("Crear orden de compra");
             await Repository.SaveChanges();
+            await Logger.Log($"Orden de compra creada");
             await OutputPort.Handle(orderAggregate.Id);
 
             await EventBus.Publish(new OrderCreatedEvent()

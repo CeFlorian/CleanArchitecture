@@ -1,4 +1,6 @@
-﻿namespace NorthWind.EFCore.Repositories.DataContexts
+﻿using NorthWind.Entities.POCOs;
+
+namespace NorthWind.EFCore.Repositories.DataContexts
 {
     public class NorthWindSalesContext : DbContext
     {
@@ -11,6 +13,8 @@
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Log> Logs { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(

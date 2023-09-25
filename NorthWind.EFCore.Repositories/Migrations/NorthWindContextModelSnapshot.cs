@@ -69,6 +69,26 @@ namespace NorthWind.EFCore.Repositories.Migrations
                     b.ToTable("Claims");
                 });
 
+            modelBuilder.Entity("NorthWind.Entities.POCOs.Log", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs");
+                });
+
             modelBuilder.Entity("NorthWind.Sales.BusinessObjects.POCOEntities.Order", b =>
                 {
                     b.Property<int>("Id")

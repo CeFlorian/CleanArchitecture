@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NorthWind.EFCore.Repositories\NorthWind.EFCore.Repositories.csproj" />
+    <ProjectReference Include="..\NorthWind.Loggers\NorthWind.Loggers.csproj" />
     <ProjectReference Include="..\NorthWind.Mongo.Repositories\NorthWind.Mongo.Repositories.csproj" />
     <ProjectReference Include="..\NorthWind.RabbitMQ.Service\NorthWind.RabbitMQProducer.Services.csproj" />
     <ProjectReference Include="..\NorthWind.Sales.Controllers\NorthWind.Sales.Controllers.csproj" />

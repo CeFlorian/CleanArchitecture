@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
+using NorthWind.Entities.Interfaces;
 using NorthWind.Sales.BusinessObjects.Enums;
 using NorthWind.Sales.BusinessObjects.Interfaces.Ports;
 using NorthWind.Sales.BusinessObjects.Interfaces.Repositories;
@@ -15,8 +17,11 @@ namespace NorthWInd.UnitTest.Unit
             // Arrange
             var mockOutputPort = new Mock<IGetAllOrdersOutputPort>();
             var mockRepository = new Mock<INorthWindSalesQuerysRepository>();
+            var mockLogger = new Mock<IApplicationStatusLogger>();
+            var mockLogRepository = new Mock<ILogWritableRepository>();
+            var mockLog = new Mock<ILogger<GetAllOrdersInteractor>>();
 
-            var interactor = new GetAllOrdersInteractor(mockOutputPort.Object, mockRepository.Object);
+            var interactor = new GetAllOrdersInteractor(mockOutputPort.Object, mockRepository.Object, mockLogger.Object, mockLogRepository.Object, mockLog.Object);
 
             var expectedOrders = new List<Order>
             {

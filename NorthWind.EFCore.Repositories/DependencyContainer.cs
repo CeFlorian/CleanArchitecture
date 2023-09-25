@@ -1,4 +1,6 @@
-﻿namespace NorthWind.EFCore.Repositories
+﻿using NorthWind.Entities.Interfaces;
+
+namespace NorthWind.EFCore.Repositories
 {
     public static class DependencyContainer
     {
@@ -15,6 +17,8 @@
                 NorthWindSalesCommandsRepository>();
             services.AddScoped<INorthWindSalesQuerysRepository,
                 NorthWindSalesQuerysRepository>();
+            services.AddScoped<ILogWritableRepository,
+                LogWritableRepository>();
             services.AddScoped<IUserCommandsRepository,
                 UserCommandsRepository>();
             services.AddScoped<IUserQuerysRepository,

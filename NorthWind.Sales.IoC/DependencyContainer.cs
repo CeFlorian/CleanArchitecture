@@ -1,3 +1,5 @@
+using NorthWind.Loggers;
+
 using NorthWind.Entities;
 using NorthWind.Sales.BusinessObjects;
 
@@ -27,6 +29,7 @@ namespace NorthWind.Sales.IoC
                 .AddUseCasesServices()
                 .AddPresenters()
                 .AddNorthWindSalesControllers()
+                .AddLoggers()
                 .AddTokenServices(configuration, jwtSettingsName)
                 .AddAPIServices(configuration, apiSettingsName)
                 .AddProducerServices(configuration, rabbitMQSettingsName);

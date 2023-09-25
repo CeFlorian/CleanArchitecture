@@ -1,4 +1,6 @@
 ﻿using Moq;
+using NorthWind.Entities.Interfaces;
+using NorthWind.Entities.Validators;
 using NorthWind.Sales.BusinessObjects.Aggregates;
 using NorthWind.Sales.BusinessObjects.DTOs.CreateOrder;
 using NorthWind.Sales.BusinessObjects.Interfaces.EventBus.Bus;
@@ -18,8 +20,12 @@ namespace NorthWInd.UnitTest.Unit
             var mockOutputPort = new Mock<ICreateOrderOutputPort>();
             var mockRepository = new Mock<INorthWindSalesCommandsRepository>();
             var mockEventBus = new Mock<IEventBusProducer>();
+            var mockValidatorService = new Mock<IValidatorService<CreateOrderDTO>>();
+            var mockValidators = new Mock<IEnumerable<IValidator<CreateOrderDTO>>>();
+            var mockLogger = new Mock<IApplicationStatusLogger>();
+            var mockLogRepository = new Mock<ILogWritableRepository>();
 
-            var interactor = new CreateOrderInteractor(mockOutputPort.Object, mockRepository.Object, mockEventBus.Object);
+            var interactor = new CreateOrderInteractor(mockOutputPort.Object, mockRepository.Object, mockLogger.Object, mockLogRepository.Object, mockValidatorService.Object, mockValidators.Object, mockEventBus.Object);
 
             var orderDTO = new CreateOrderDTO
             {

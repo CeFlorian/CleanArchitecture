@@ -74,6 +74,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.E2ETest", "NorthW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Shared", "NorthWind.Shared\NorthWind.Shared.csproj", "{99A199B5-2A53-440B-9CB7-5CD282708AAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthWind.Loggers", "NorthWind.Loggers\NorthWind.Loggers.csproj", "{C648B8E2-5118-4F2F-B93F-B6A9B9C1D25C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -160,6 +162,10 @@ Global
 		{99A199B5-2A53-440B-9CB7-5CD282708AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99A199B5-2A53-440B-9CB7-5CD282708AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99A199B5-2A53-440B-9CB7-5CD282708AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C648B8E2-5118-4F2F-B93F-B6A9B9C1D25C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C648B8E2-5118-4F2F-B93F-B6A9B9C1D25C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C648B8E2-5118-4F2F-B93F-B6A9B9C1D25C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C648B8E2-5118-4F2F-B93F-B6A9B9C1D25C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,6 +200,7 @@ Global
 		{5FE325CC-178E-463A-9A28-96DC96D0D3AF} = {82028033-55B8-46AF-A30C-F81E4FC7C61A}
 		{DCE5E0B7-5B33-4347-8673-7FC621811310} = {82028033-55B8-46AF-A30C-F81E4FC7C61A}
 		{99A199B5-2A53-440B-9CB7-5CD282708AAB} = {82028033-55B8-46AF-A30C-F81E4FC7C61A}
+		{C648B8E2-5118-4F2F-B93F-B6A9B9C1D25C} = {FA0E859E-759C-4DCE-828E-B9EFBA35FA1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90ACBE69-4268-4CFA-A92C-1299F44B1A8E}

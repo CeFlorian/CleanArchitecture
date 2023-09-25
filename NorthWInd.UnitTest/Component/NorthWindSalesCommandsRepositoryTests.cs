@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Moq;
 using NorthWind.EFCore.Repositories.DataContexts;
 using NorthWind.EFCore.Repositories.Repositories;
+using NorthWind.Entities.Interfaces;
 using NorthWind.Sales.BusinessObjects.Aggregates;
 
 namespace NorthWInd.UnitTest.Component
@@ -16,11 +18,12 @@ namespace NorthWInd.UnitTest.Component
                 .Options;
 
             var context = new NorthWindSalesContext(options);
+            var mockLogger = new Mock<IApplicationStatusLogger>();
 
             // No es necesario cuando se usa un context de DB en memoria
             //context.Database.EnsureCreated();
 
-            var commandsRepository = new NorthWindSalesCommandsRepository(context);
+            var commandsRepository = new NorthWindSalesCommandsRepository(context, mockLogger.Object);
             var querysRepository = new NorthWindSalesQuerysRepository(context);
 
             var orderAggregate = new OrderAggregate
