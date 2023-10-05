@@ -10,7 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-    <PackageReference Include="Selenium.WebDriver" Version="4.12.2" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.13.1" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="117.0.5938.9200" />
     <PackageReference Include="Testcontainers.MongoDb" Version="3.4.0" />
     <PackageReference Include="Testcontainers.MsSql" Version="3.4.0" />
     <PackageReference Include="Testcontainers.RabbitMq" Version="3.4.0" />
@@ -30,6 +31,15 @@
     <ProjectReference Include="..\NorthWind.Sales.API\NorthWind.Sales.API.csproj" />
     <ProjectReference Include="..\NorthWind.Shared\NorthWind.Shared.csproj" />
     <ProjectReference Include="..\NorthWindRabbitMQConsumer.Services\NorthWindRabbitMQConsumer.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ChromeDriverResources\chromedriver.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ChromeDriverResources\LICENSE.chromedriver">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

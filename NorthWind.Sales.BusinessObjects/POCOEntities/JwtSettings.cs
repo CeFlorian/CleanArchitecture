@@ -1,4 +1,4 @@
-﻿namespace NorthWind.Token.Services.JWT
+﻿namespace NorthWind.Sales.BusinessObjects.POCOEntities
 {
     public class JwtSettings
     {

@@ -1,7 +1,9 @@
-﻿using NorthWind.Sales.BusinessObjects.DTOs.Login;
+﻿using NorthWind.Entities.Interfaces;
+using NorthWind.Sales.BusinessObjects.DTOs.Login;
 using NorthWind.Sales.BusinessObjects.Enums;
 using NorthWind.Sales.BusinessObjects.Interfaces.Services;
 using NorthWind.Sales.BusinessObjects.POCOEntities;
+using NorthWind.Sales.BusinessObjects.POCOEntities.DomainEvents;
 
 namespace NorthWind.Sales.UseCases.Login
 {
@@ -12,13 +14,14 @@ namespace NorthWind.Sales.UseCases.Login
         readonly IUserQuerysRepository UserQuerysRepository;
         readonly IRefreshTokenCommandsRepository RefreshTokenCommandsRepository;
         readonly ICryptographyService CryptographyService;
+        readonly ILogWritableRepository LogRepository;
 
         readonly IWeatherAPIService WeatherAPIService;
 
         public LoginInteractor(ILoginOutputPort outputPort, IAuthTokenService authTokenService,
             IUserQuerysRepository serQuerysRepository, ICryptographyService cryptographyService,
             IRefreshTokenCommandsRepository refreshTokenCommandsRepository,
-            IWeatherAPIService weatherAPIService)
+            IWeatherAPIService weatherAPIService, ILogWritableRepository logRepository)
         {
             OutputPort = outputPort;
             AuthTokenService = authTokenService;
@@ -27,6 +30,15 @@ namespace NorthWind.Sales.UseCases.Login
             CryptographyService = cryptographyService;
 
             WeatherAPIService = weatherAPIService;
+            LogRepository = logRepository;
+
+
+            //Por motivo de ejemplo se realizara el registro/suscripcion desde aca
+            Events.AccessTokenGenerated.Register(async (parameter) =>
+            {
+                await LogRepository.Add($"Token de acceso generado al usuario {parameter.name} con Id: {parameter.userId}");
+            });
+
         }
 
         public async Task Handle(LoginRequestDTO request)
@@ -70,7 +82,10 @@ namespace NorthWind.Sales.UseCases.Login
                     await RefreshTokenCommandsRepository.SaveChanges();
                     await OutputPort.Handle(response);
 
+                    //Unicamente por motivo de ejemplo para validar el consumo de APIs externas, ninguna relacion con el flujo de Login
                     var result = await WeatherAPIService.GetWeatherForecasts(accessToken);
+
+                    Events.AccessTokenGenerated.Publish(new AccessTokenGenerated(user.Id, user.Name));
 
                     return;
                 }

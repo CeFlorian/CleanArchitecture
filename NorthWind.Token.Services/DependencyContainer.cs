@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using NorthWind.Sales.BusinessObjects.Interfaces.Services;
+using NorthWind.Sales.BusinessObjects.POCOEntities;
 using NorthWind.Token.Services.Cryptography;
 using NorthWind.Token.Services.JWT;
 using System.Security.Cryptography;

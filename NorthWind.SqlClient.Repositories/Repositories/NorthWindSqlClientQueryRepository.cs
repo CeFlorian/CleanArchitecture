@@ -19,7 +19,8 @@ namespace NorthWind.SqlClient.Repositories.Repositories
 
         public Task<Order> GetOrderById(int id)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return Task.FromResult(DataAccess.GetAllOrders(true).Result.Where(o => o.Id == id).SingleOrDefault());
         }
     }
 }

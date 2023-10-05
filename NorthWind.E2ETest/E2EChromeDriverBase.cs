@@ -10,7 +10,7 @@ namespace NorthWind.E2ETest
 
         public E2EChromeDriverBase()
         {
-            var assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var assemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\ChromeDriverResources";
             var chromeOptions = new ChromeOptions();
 
             chromeOptions.AddArgument("--lang=en");
